@@ -16,6 +16,7 @@ const SETTINGS = {
 
 // Track current state
 let isEnabled = true;
+let isGenerating = false;
 let topBarButton = null;
 
 /**
@@ -29,16 +30,27 @@ function getDiscordIcon(color = "currentColor") {
 
 /**
  * Update the visual state of the top bar button.
+ * Three states: disabled (grey), idle (blue), generating (green).
  */
-function updateButtonState(button, enabled) {
+function updateButtonState(button) {
     if (!button) return;
-    button.innerHTML = getDiscordIcon(enabled ? "#FFFFFF" : "#666666");
-    button.style.opacity = enabled ? "1" : "0.5";
-    button.style.background = enabled ? "#5865F2" : "transparent";
+    if (!isEnabled) {
+        button.innerHTML = getDiscordIcon("#666666");
+        button.style.opacity = "0.5";
+        button.style.background = "transparent";
+        button.title = "Discord Rich Presence: OFF (click to enable)";
+    } else if (isGenerating) {
+        button.innerHTML = getDiscordIcon("#FFFFFF");
+        button.style.opacity = "1";
+        button.style.background = "#57F287";
+        button.title = "Discord Rich Presence: Generating...";
+    } else {
+        button.innerHTML = getDiscordIcon("#FFFFFF");
+        button.style.opacity = "1";
+        button.style.background = "#5865F2";
+        button.title = "Discord Rich Presence: ON (click to disable)";
+    }
     button.style.borderRadius = "4px";
-    button.title = enabled
-        ? "Discord Rich Presence: ON (click to disable)"
-        : "Discord Rich Presence: OFF (click to enable)";
 }
 
 /**
@@ -91,7 +103,7 @@ async function toggleDiscordRPC() {
     }
 
     // Update button visual
-    updateButtonState(topBarButton, isEnabled);
+    updateButtonState(topBarButton);
 }
 
 /**
@@ -125,6 +137,24 @@ app.registerExtension({
         // Fetch current state from backend
         await fetchInitialState();
 
+        // Listen to ComfyUI execution events for button color changes
+        app.api.addEventListener("execution_start", () => {
+            isGenerating = true;
+            updateButtonState(topBarButton);
+        });
+        app.api.addEventListener("executed", () => {
+            isGenerating = false;
+            updateButtonState(topBarButton);
+        });
+        app.api.addEventListener("execution_error", () => {
+            isGenerating = false;
+            updateButtonState(topBarButton);
+        });
+        app.api.addEventListener("execution_interrupted", () => {
+            isGenerating = false;
+            updateButtonState(topBarButton);
+        });
+
         // Find and customize our button in the action bar.
         // PrimeVue renders async so we retry until the button appears.
         let retries = 0;
@@ -134,7 +164,7 @@ app.registerExtension({
             );
             if (button) {
                 topBarButton = button;
-                updateButtonState(button, isEnabled);
+                updateButtonState(button);
                 button.style.padding = "6px";
                 button.style.borderRadius = "4px";
                 button.style.border = "1px solid transparent";
@@ -159,7 +189,7 @@ app.registerExtension({
             category: ["Discord RPC", "General", "Enable"],
             onChange(value) {
                 isEnabled = value;
-                updateButtonState(topBarButton, value);
+                updateButtonState(topBarButton);
                 pushSettingToBackend(SETTINGS.ENABLED, value);
             },
         },
