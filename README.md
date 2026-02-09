@@ -21,6 +21,7 @@ Show your ComfyUI generation status in Discord. Displays model name, step progre
 ### ⚙️ Customization
 | | |
 |---|---|
+| **Quick toggle** | Enable/disable directly from the toolbar button |
 | **Privacy mode** | Hide model name and generation details |
 | **Custom idle text** | Set your own status text when not generating |
 
