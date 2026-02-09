@@ -58,23 +58,6 @@ All settings are accessible in **ComfyUI Settings > Discord Rich Presence**.
 | Custom Idle Text | ` ` | Custom text when idle (default: "Idle") |
 | Privacy Mode | `Off` | Hides model name and details |
 
-## Discord Developer Portal
-
-The extension comes pre-configured with a Discord Application. If you want to customize the app name or icons shown in Discord:
-
-1. Go to [Discord Developer Portal](https://discord.com/developers/applications)
-2. Create a new Application (the app name is what appears in Discord)
-3. Upload your Rich Presence assets under **Rich Presence > Art Assets**
-4. Copy the Application ID and set it as `client_id` in the extension config
-
-### Required asset keys
-
-| Key | Description |
-|---|---|
-| `comfyui_logo` | Large icon shown when idle |
-| `comfyui_generating` | Large icon shown when generating |
-| `progress_000` – `progress_100` | Small progress ring icons (5% increments, 21 total) |
-
 ## Requirements
 
 - **ComfyUI Desktop** or standalone ComfyUI
