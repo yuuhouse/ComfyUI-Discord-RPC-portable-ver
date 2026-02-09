@@ -1,0 +1,92 @@
+name: Bug Report
+description: Report a bug with ComfyUI Discord Rich Presence
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug! Please fill out the form below to help us diagnose the issue.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the bug
+      description: A clear description of what the bug is.
+      placeholder: "Discord status stays on Idle during generation..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: How can we reproduce this behavior?
+      placeholder: |
+        1. Open ComfyUI
+        2. Queue a generation
+        3. Check Discord status
+        4. ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What did you expect to happen?
+    validations:
+      required: true
+
+  - type: textarea
+    id: debug_log
+    attributes:
+      label: Debug log
+      description: |
+        Enable **Debug Logging** in ComfyUI Settings → Discord RPC → Advanced, reproduce the issue, then paste the console output here.
+        Look for lines starting with `[Discord RPC]`.
+      render: text
+      placeholder: |
+        [Discord RPC] Server hooks registered
+        [Discord RPC] Connected to Discord
+        [Discord RPC] Event: execution_start
+        ...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating System
+      options:
+        - Windows
+        - macOS
+        - Linux
+    validations:
+      required: true
+
+  - type: dropdown
+    id: comfyui_type
+    attributes:
+      label: ComfyUI installation
+      options:
+        - ComfyUI Desktop (Electron)
+        - Standalone / Manual
+    validations:
+      required: true
+
+  - type: input
+    id: extension_version
+    attributes:
+      label: Extension version
+      description: Check in ComfyUI Manager or pyproject.toml
+      placeholder: "1.0.2"
+    validations:
+      required: false
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots
+      description: If applicable, add screenshots to help explain your problem.
+    validations:
+      required: false

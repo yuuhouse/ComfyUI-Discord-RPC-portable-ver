@@ -85,6 +85,7 @@ pip install pypresence
 | Show Elapsed Time | `On` | Show elapsed time timer |
 | Custom Idle Text | ` ` | Custom text when idle (default: "Idle") |
 | Privacy Mode | `Off` | Hides model name and details |
+| Debug Logging | `Off` | Log events to console for troubleshooting |
 
 > [!TIP]
 > Enable **Privacy Mode** to hide your model name and workflow details from other Discord users.
@@ -97,6 +98,12 @@ pip install pypresence
 
 > [!WARNING]
 > If Discord is not running when ComfyUI starts, the extension will retry connecting in the background. No action needed — it will connect automatically once Discord is launched.
+
+## Troubleshooting
+
+If something isn't working, enable **Debug Logging** in **Settings → Discord RPC → Advanced** and reproduce the issue. The console will show `[Discord RPC]` messages with event details.
+
+When [reporting an issue](https://github.com/davehornik/ComfyUI-Discord-RPC/issues/new/choose), please include the debug log output — it helps diagnose the problem much faster.
 
 ## License
 
