@@ -21,6 +21,9 @@ Show your ComfyUI generation status in Discord. Displays model name, step progre
 
 ## Installation
 
+> [!TIP]
+> The easiest way to install is through ComfyUI Manager.
+
 ### ComfyUI Manager (Recommended)
 
 Search for `Discord Rich Presence` in ComfyUI Manager and install.
@@ -33,7 +36,8 @@ git clone https://github.com/davehornik/ComfyUI-Discord-RPC.git
 pip install pypresence
 ```
 
-Restart ComfyUI after installation.
+> [!IMPORTANT]
+> Restart ComfyUI after installation.
 
 ## Setup
 
@@ -41,7 +45,8 @@ Restart ComfyUI after installation.
 2. Make sure Discord desktop app is running
 3. The extension connects automatically — you should see your status in Discord within a few seconds
 
-> **Note:** Discord mobile and web don't support Rich Presence. The desktop app is required.
+> [!NOTE]
+> Discord mobile and web don't support Rich Presence. The desktop app is required.
 
 ## Settings
 
@@ -58,11 +63,17 @@ All settings are accessible in **ComfyUI Settings > Discord Rich Presence**.
 | Custom Idle Text | ` ` | Custom text when idle (default: "Idle") |
 | Privacy Mode | `Off` | Hides model name and details |
 
+> [!TIP]
+> Enable **Privacy Mode** to hide your model name and workflow details from other Discord users.
+
 ## Requirements
 
 - **ComfyUI Desktop** or standalone ComfyUI
 - **Discord desktop app** (Rich Presence is not supported on mobile/web)
 - **Python package:** `pypresence >= 4.3.0` (installed automatically via ComfyUI Manager)
+
+> [!WARNING]
+> If Discord is not running when ComfyUI starts, the extension will retry connecting in the background. No action needed — it will connect automatically once Discord is launched.
 
 ## License
 
