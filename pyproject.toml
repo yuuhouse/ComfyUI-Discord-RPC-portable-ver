@@ -6,7 +6,7 @@ license = {text = "MIT"}
 dependencies = ["pypresence>=4.3.0"]
 
 [project.urls]
-Repository = "https://github.com/davehornik/comfyui-discord-rpc"
+Repository = "https://github.com/davehornik/ComfyUI-Discord-RPC"
 
 [tool.comfy]
 PublisherId = "davehornik"
