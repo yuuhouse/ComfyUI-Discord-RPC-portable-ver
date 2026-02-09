@@ -2,7 +2,10 @@
 
 Show your ComfyUI generation status in Discord. Displays model name, step progress, queue info, and a live progress ring — all configurable from ComfyUI settings.
 
-<!-- screenshots here -->
+<img width="450" height="182" alt="image" src="https://github.com/user-attachments/assets/496edda5-25c4-4f09-bcc0-200d3548aa78" />
+
+<img width="472" height="194" alt="image" src="https://github.com/user-attachments/assets/3bb2c4b9-da9e-4b71-a386-d23b346ec1c0" />
+
 
 ---
 
@@ -62,7 +65,15 @@ pip install pypresence
 
 ## Settings
 
-All settings are accessible in **ComfyUI Settings > Discord Rich Presence**.
+<img width="781" height="96" alt="image" src="https://github.com/user-attachments/assets/88214e26-6666-4b4b-b2ec-1c4e2c9b1d03" />
+
+
+
+### All settings are accessible in **ComfyUI Settings > Discord Rich Presence**.
+<br>
+<img width="774" height="777" alt="image" src="https://github.com/user-attachments/assets/611fe18d-7eed-4c6e-84de-5379f9adcc41" />
+<br>
+<br>
 
 | Setting | Default | Description |
 |---|---|---|
