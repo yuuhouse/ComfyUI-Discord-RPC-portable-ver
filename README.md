@@ -8,16 +8,27 @@ Show your ComfyUI generation status in Discord. Displays model name, step progre
 
 ## Features
 
-- **Live progress ring** — animated small icon showing generation percentage (0–100% in 5% steps)
-- **Model name** — displays the currently loaded checkpoint/UNET model
-- **Step counter** — shows current step and total (e.g. `Step 12/20`)
-- **Node tracking** — optionally shows which node is currently executing
-- **Queue info** — displays remaining items when queue has multiple prompts
-- **Elapsed timer** — how long you've been generating or idle
-- **Privacy mode** — hides model name and generation details
-- **Custom idle text** — set your own status text when not generating
-- **Auto-reconnect** — handles Discord restarts gracefully
-- **Zero nodes** — pure service extension, nothing added to your workflow
+### 📊 Status Display
+| | |
+|---|---|
+| **Live progress ring** | Animated icon showing generation percentage (0–100%) |
+| **Model name** | Currently loaded checkpoint or UNET model |
+| **Step counter** | Current step and total, e.g. `Step 12/20` |
+| **Node tracking** | Which node is currently executing |
+| **Queue info** | Remaining items when queue has multiple prompts |
+| **Elapsed timer** | How long you've been generating or idle |
+
+### ⚙️ Customization
+| | |
+|---|---|
+| **Privacy mode** | Hide model name and generation details |
+| **Custom idle text** | Set your own status text when not generating |
+
+### 🔧 Under the Hood
+| | |
+|---|---|
+| **Auto-reconnect** | Handles Discord restarts gracefully |
+| **Zero nodes** | Pure service extension, nothing added to your workflow |
 
 ## Installation
 
