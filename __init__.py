@@ -27,7 +27,7 @@ def _init_discord_rpc():
         )
         return
 
-    from .config import load_config, set_rpc_manager, register_routes
+    from .config import load_config, get_config, set_rpc_manager, register_routes
     from .discord_rpc_manager import DiscordRPCManager
     from .state_tracker import StateTracker
 
@@ -76,9 +76,13 @@ def _init_discord_rpc():
 
             def wrapped_send_sync(event, data, sid=None):
                 try:
+                    if get_config().get("debug_logging", False):
+                        if event in ("execution_start", "progress", "executing",
+                                     "execution_error", "execution_interrupted"):
+                            logger.info(f"[Discord RPC] Event: {event}")
                     state_tracker.on_server_event(event, data)
                 except Exception as e:
-                    logger.debug(f"[Discord RPC] Error in event handler: {e}")
+                    logger.warning(f"[Discord RPC] Event handler error ({event}): {e}")
                 return original_send_sync(event, data, sid)
 
             server.send_sync = wrapped_send_sync

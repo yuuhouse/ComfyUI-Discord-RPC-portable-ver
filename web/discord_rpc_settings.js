@@ -12,6 +12,7 @@ const SETTINGS = {
     SHOW_TIME: "discord_rpc.show_elapsed_time",
     CUSTOM_IDLE: "discord_rpc.custom_idle_text",
     PRIVACY_MODE: "discord_rpc.privacy_mode",
+    DEBUG_LOGGING: "discord_rpc.debug_logging",
 };
 
 // Track current state
@@ -67,6 +68,7 @@ async function pushSettingToBackend(key, value) {
             [SETTINGS.SHOW_TIME]: "show_elapsed_time",
             [SETTINGS.CUSTOM_IDLE]: "custom_idle_text",
             [SETTINGS.PRIVACY_MODE]: "privacy_mode",
+            [SETTINGS.DEBUG_LOGGING]: "debug_logging",
         };
         const backendKey = keyMap[key];
         if (!backendKey) return;
@@ -280,6 +282,19 @@ app.registerExtension({
             category: ["Discord RPC", "Privacy", "Privacy Mode"],
             onChange(value) {
                 pushSettingToBackend(SETTINGS.PRIVACY_MODE, value);
+            },
+        },
+        {
+            id: SETTINGS.DEBUG_LOGGING,
+            name: "Debug Logging",
+            type: "boolean",
+            defaultValue: false,
+            tooltip:
+                "Log execution events to the console for troubleshooting. " +
+                "Enable this when reporting issues on GitHub.",
+            category: ["Discord RPC", "Advanced", "Debug Logging"],
+            onChange(value) {
+                pushSettingToBackend(SETTINGS.DEBUG_LOGGING, value);
             },
         },
     ],

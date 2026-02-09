@@ -8,6 +8,7 @@
     "show_elapsed_time": true,
     "custom_idle_text": "",
     "privacy_mode": false,
+    "debug_logging": false,
     "idle_update_interval": 15,
     "generating_update_interval": 5,
     "reconnect_interval": 15
