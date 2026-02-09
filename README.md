@@ -1,0 +1,86 @@
+# ComfyUI Discord Rich Presence
+
+Show your ComfyUI generation status in Discord. Displays model name, step progress, queue info, and a live progress ring — all configurable from ComfyUI settings.
+
+<!-- screenshots here -->
+
+---
+
+## Features
+
+- **Live progress ring** — animated small icon showing generation percentage (0–100% in 5% steps)
+- **Model name** — displays the currently loaded checkpoint/UNET model
+- **Step counter** — shows current step and total (e.g. `Step 12/20`)
+- **Node tracking** — optionally shows which node is currently executing
+- **Queue info** — displays remaining items when queue has multiple prompts
+- **Elapsed timer** — how long you've been generating or idle
+- **Privacy mode** — hides model name and generation details
+- **Custom idle text** — set your own status text when not generating
+- **Auto-reconnect** — handles Discord restarts gracefully
+- **Zero nodes** — pure service extension, nothing added to your workflow
+
+## Installation
+
+### ComfyUI Manager (Recommended)
+
+Search for `Discord Rich Presence` in ComfyUI Manager and install.
+
+### Manual
+
+```bash
+cd ComfyUI/custom_nodes
+git clone https://github.com/davehornik/ComfyUI-Discord-RPC.git
+pip install pypresence
+```
+
+Restart ComfyUI after installation.
+
+## Setup
+
+1. Install the extension and restart ComfyUI
+2. Make sure Discord desktop app is running
+3. The extension connects automatically — you should see your status in Discord within a few seconds
+
+> **Note:** Discord mobile and web don't support Rich Presence. The desktop app is required.
+
+## Settings
+
+All settings are accessible in **ComfyUI Settings > Discord Rich Presence**.
+
+| Setting | Default | Description |
+|---|---|---|
+| Enable Discord RPC | `On` | Master toggle for the extension |
+| Show Model Name | `On` | Display checkpoint/UNET name in status |
+| Show Queue Info | `On` | Show remaining queue count |
+| Show Node Name | `Off` | Show the currently executing node |
+| Show Step Progress | `On` | Display step counter (e.g. Step 12/20) |
+| Show Elapsed Time | `On` | Show elapsed time timer |
+| Custom Idle Text | ` ` | Custom text when idle (default: "Idle") |
+| Privacy Mode | `Off` | Hides model name and details |
+
+## Discord Developer Portal
+
+The extension comes pre-configured with a Discord Application. If you want to customize the app name or icons shown in Discord:
+
+1. Go to [Discord Developer Portal](https://discord.com/developers/applications)
+2. Create a new Application (the app name is what appears in Discord)
+3. Upload your Rich Presence assets under **Rich Presence > Art Assets**
+4. Copy the Application ID and set it as `client_id` in the extension config
+
+### Required asset keys
+
+| Key | Description |
+|---|---|
+| `comfyui_logo` | Large icon shown when idle |
+| `comfyui_generating` | Large icon shown when generating |
+| `progress_000` – `progress_100` | Small progress ring icons (5% increments, 21 total) |
+
+## Requirements
+
+- **ComfyUI Desktop** or standalone ComfyUI
+- **Discord desktop app** (Rich Presence is not supported on mobile/web)
+- **Python package:** `pypresence >= 4.3.0` (installed automatically via ComfyUI Manager)
+
+## License
+
+MIT
