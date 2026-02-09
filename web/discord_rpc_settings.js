@@ -125,8 +125,10 @@ app.registerExtension({
         // Fetch current state from backend
         await fetchInitialState();
 
-        // Find and customize our button in the action bar
-        requestAnimationFrame(() => {
+        // Find and customize our button in the action bar.
+        // PrimeVue renders async so we retry until the button appears.
+        let retries = 0;
+        const findButton = () => {
             const button = document.querySelector(
                 'button[aria-label="Toggle Discord Rich Presence"]'
             );
@@ -137,8 +139,12 @@ app.registerExtension({
                 button.style.borderRadius = "4px";
                 button.style.border = "1px solid transparent";
                 button.style.transition = "all 0.2s ease";
+            } else if (retries < 20) {
+                retries++;
+                setTimeout(findButton, 250);
             }
-        });
+        };
+        requestAnimationFrame(findButton);
     },
 
     settings: [
