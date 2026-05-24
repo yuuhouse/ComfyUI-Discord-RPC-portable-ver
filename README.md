@@ -39,6 +39,18 @@ Show your ComfyUI generation status in Discord. Displays model name, step progre
 > [!TIP]
 > The easiest way to install is through ComfyUI Manager.
 
+> [!IMPORTANT]
+> If you use the Windows portable build, install `pypresence` with the
+> bundled Python that starts ComfyUI:
+>
+> ```powershell
+> C:\ComfyUI_windows_portable\python_embeded\python.exe -m pip install pypresence
+> ```
+>
+> If your portable folder has a different name or location, adjust the path.
+> The package must be installed into ComfyUI's Python environment, not a
+> separate system Python.
+
 ### ComfyUI Manager (Recommended)
 
 Search for `Discord Rich Presence` in ComfyUI Manager and install.
@@ -48,7 +60,7 @@ Search for `Discord Rich Presence` in ComfyUI Manager and install.
 ```bash
 cd ComfyUI/custom_nodes
 git clone https://github.com/davehornik/ComfyUI-Discord-RPC.git
-pip install pypresence
+python -m pip install pypresence
 ```
 
 > [!IMPORTANT]
