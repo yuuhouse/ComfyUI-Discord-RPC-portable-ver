@@ -6,6 +6,7 @@
     "show_node_name": false,
     "show_step_progress": true,
     "show_elapsed_time": true,
+    "show_current_run_time": true,
     "custom_idle_text": "",
     "privacy_mode": false,
     "debug_logging": false,

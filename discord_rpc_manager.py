@@ -26,6 +26,7 @@ class DiscordRPCManager:
         self.should_run = True
 
         self._lock = threading.Lock()
+        session_start_time = time.time()
         self._state = {
             "status": "idle",  # "idle" | "generating"
             "progress_value": 0,
@@ -34,7 +35,8 @@ class DiscordRPCManager:
             "prompt_id": "",
             "queue_remaining": 0,
             "current_node": "",
-            "idle_since": time.time(),
+            "session_start_time": session_start_time,
+            "idle_since": session_start_time,
             "generation_start_time": None,
         }
 
@@ -106,7 +108,6 @@ class DiscordRPCManager:
             self._state["status"] = "idle"
             self._state["progress_value"] = 0
             self._state["progress_max"] = 0
-            self._state["idle_since"] = time.time()
             self._state["generation_start_time"] = None
         self._update_event.set()
 
@@ -157,9 +158,6 @@ class DiscordRPCManager:
         while self.should_run:
             try:
                 self._connect()
-                # Reset idle timestamp on fresh connection so elapsed time is correct
-                with self._lock:
-                    self._state["idle_since"] = time.time()
                 # Give Discord time to process the handshake before first update
                 time.sleep(1)
                 self._update_loop()
@@ -237,6 +235,7 @@ class DiscordRPCManager:
         show_node = self.config.get("show_node_name", False)
         show_steps = self.config.get("show_step_progress", True)
         show_time = self.config.get("show_elapsed_time", True)
+        show_run_time = self.config.get("show_current_run_time", True)
         custom_idle = self.config.get("custom_idle_text", "")
         privacy = self.config.get("privacy_mode", False)
 
@@ -259,7 +258,7 @@ class DiscordRPCManager:
                 details=details,
             )
             if show_time:
-                kwargs["start"] = int(state["idle_since"])
+                kwargs["start"] = int(state["session_start_time"])
 
             self._presence.update(**kwargs)
 
@@ -283,6 +282,10 @@ class DiscordRPCManager:
             if show_queue and state["queue_remaining"] > 1:
                 parts.append(f"Queue: {state['queue_remaining']}")
 
+            if show_run_time and state["generation_start_time"]:
+                elapsed = max(0, int(time.time() - state["generation_start_time"]))
+                parts.append(f"Run {self._format_duration(elapsed)}")
+
             step_text = " | ".join(parts) if parts else "Generating..."
 
             # Details line (top line): model name
@@ -293,7 +296,7 @@ class DiscordRPCManager:
             else:
                 details = "Generating..."
 
-            start_time = state["generation_start_time"] or state["idle_since"]
+            start_time = state["session_start_time"]
 
             kwargs = dict(
                 large_image="comfyui_generating",
@@ -407,3 +410,12 @@ class DiscordRPCManager:
         rounded = (percent // 5) * 5
         rounded = min(100, max(0, rounded))
         return f"progress_{rounded:03d}"
+
+    @staticmethod
+    def _format_duration(seconds):
+        """Format elapsed seconds as H:MM:SS or M:SS."""
+        hours, remainder = divmod(seconds, 3600)
+        minutes, secs = divmod(remainder, 60)
+        if hours:
+            return f"{hours}:{minutes:02d}:{secs:02d}"
+        return f"{minutes}:{secs:02d}"

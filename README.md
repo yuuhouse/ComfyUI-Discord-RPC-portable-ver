@@ -8,6 +8,10 @@ Show your ComfyUI generation status in Discord. Displays model name, step progre
 
 
 ---
+## Updates
+
+### 修改時間計算方式：改成總計開啟時間，不會每完成一次運行就重置時間
+
 
 ## Features
 
@@ -19,7 +23,8 @@ Show your ComfyUI generation status in Discord. Displays model name, step progre
 | **Step counter** | Current step and total, e.g. `Step 12/20` |
 | **Node tracking** | Which node is currently executing |
 | **Queue info** | Remaining items when queue has multiple prompts |
-| **Elapsed timer** | How long you've been generating or idle |
+| **Elapsed timer** | Total time since the extension started |
+| **Current run time** | Current generation time shown in the status text |
 
 ### ⚙️ Customization
 | | |
@@ -94,7 +99,8 @@ python -m pip install pypresence
 | Show Queue Info | `On` | Show remaining queue count |
 | Show Node Name | `Off` | Show the currently executing node |
 | Show Step Progress | `On` | Display step counter (e.g. Step 12/20) |
-| Show Elapsed Time | `On` | Show elapsed time timer |
+| Show Elapsed Time | `On` | Show total session timer |
+| Show Current Run Time | `On` | Show current generation time in status text |
 | Custom Idle Text | ` ` | Custom text when idle (default: "Idle") |
 | Privacy Mode | `Off` | Hides model name and details |
 | Debug Logging | `Off` | Log events to console for troubleshooting |

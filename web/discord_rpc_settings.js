@@ -10,6 +10,7 @@ const SETTINGS = {
     SHOW_NODE: "discord_rpc.show_node_name",
     SHOW_STEPS: "discord_rpc.show_step_progress",
     SHOW_TIME: "discord_rpc.show_elapsed_time",
+    SHOW_RUN_TIME: "discord_rpc.show_current_run_time",
     CUSTOM_IDLE: "discord_rpc.custom_idle_text",
     PRIVACY_MODE: "discord_rpc.privacy_mode",
     DEBUG_LOGGING: "discord_rpc.debug_logging",
@@ -66,6 +67,7 @@ async function pushSettingToBackend(key, value) {
             [SETTINGS.SHOW_NODE]: "show_node_name",
             [SETTINGS.SHOW_STEPS]: "show_step_progress",
             [SETTINGS.SHOW_TIME]: "show_elapsed_time",
+            [SETTINGS.SHOW_RUN_TIME]: "show_current_run_time",
             [SETTINGS.CUSTOM_IDLE]: "custom_idle_text",
             [SETTINGS.PRIVACY_MODE]: "privacy_mode",
             [SETTINGS.DEBUG_LOGGING]: "debug_logging",
@@ -251,11 +253,24 @@ app.registerExtension({
             type: "boolean",
             defaultValue: true,
             tooltip:
-                "Display elapsed time in your Discord status. " +
+                "Display the total session timer in your Discord status. " +
                 "When disabled, no timer is shown.",
             category: ["Discord RPC", "Display", "Elapsed Time"],
             onChange(value) {
                 pushSettingToBackend(SETTINGS.SHOW_TIME, value);
+            },
+        },
+        {
+            id: SETTINGS.SHOW_RUN_TIME,
+            name: "Show Current Run Time",
+            type: "boolean",
+            defaultValue: true,
+            tooltip:
+                "Display the current generation runtime in the status text. " +
+                "The main elapsed timer still shows total session time.",
+            category: ["Discord RPC", "Display", "Run Time"],
+            onChange(value) {
+                pushSettingToBackend(SETTINGS.SHOW_RUN_TIME, value);
             },
         },
         {

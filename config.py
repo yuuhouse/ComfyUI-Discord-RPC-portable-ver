@@ -30,6 +30,7 @@ def _load_defaults():
             "show_node_name": False,
             "show_step_progress": True,
             "show_elapsed_time": True,
+            "show_current_run_time": True,
             "custom_idle_text": "",
             "privacy_mode": False,
             "idle_update_interval": 15,
