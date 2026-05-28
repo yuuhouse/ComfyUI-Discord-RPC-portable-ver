@@ -11,7 +11,12 @@ Show your ComfyUI generation status in Discord. Displays model name, step progre
 ## Updates
 
 ### 修改時間計算方式：改成總計開啟時間，不會每完成一次運行就重置時間
-
+## 修改 Discord RPC 時間顯示邏輯
+- 將 Discord 內建 elapsed timer 改為總開啟時間
+- 完成一次生成後不再重置 elapsed timer
+- 生成中額外顯示本次運行時間
+- 新增 Show Current Run Time 設定開關
+- 更新 README 的時間顯示說明
 
 ## Features
 
